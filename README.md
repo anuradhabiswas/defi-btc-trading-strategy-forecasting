@@ -158,8 +158,6 @@ This extends the discussion beyond in-sample predictability. In short, the contr
 ## Repository Contents
 
 - `presentation/` — Final project presentation (PDF)
-- `code/` — Data prep, forecasting, and trading strategy scripts *(if shareable)*
-- `outputs/` — Tables/figures for forecast and trading results
 - `README.md` — Project overview, methods, findings, and interpretation
 
 ---
