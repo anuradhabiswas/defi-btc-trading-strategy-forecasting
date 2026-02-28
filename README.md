@@ -118,21 +118,25 @@ Daily strategy returns are computed from forecast sign × actual return and accu
 ## Key Findings (Summary)
 
 ### In-sample
-- Maker shows **predictive power for Bitcoin spot** in the Granger framework
-- No comparable predictive effect for Bitcoin futures (consistent with stronger market efficiency)
+- Maker shows **predictive power for Bitcoin spot** in the Granger framework (significant test result)
+- No comparable predictive effect for Bitcoin futures (not significant, even at the 10% level), consistent with stronger market efficiency
 
 ### Out-of-sample forecasting
-- Maker-based models do not produce large statistical improvements in standard forecast metrics
-- Directional accuracy is only modestly above 50% in baseline comparisons
+- All four models beat the **no-change benchmark** on MSFE ratio in the main spot forecast table, but differences are small
+- Directional accuracy is only modestly above random in baseline comparisons; the **Maker-only model is ~0.537 (53.7%)**, and results are not statistically significant under standard forecast metrics
 
 ### Trading profitability (main result)
-- Maker-based models (especially **LRM with Maker**, and also VAR) generate **higher cumulative and risk-adjusted returns** than benchmark strategies in the Bitcoin **spot** market over the main forecast window
-- Comparable gains do **not** appear consistently in Bitcoin **futures**
+- In the 2024 spot-market evaluation window, the benchmark **buy-and-hold strategy earns ~320% cumulative return**
+- Maker-based models (especially **LRM with Maker**, and also VAR) increase cumulative returns to **~347–348%**
+- This is an economically meaningful improvement of roughly **+25 to +30 percentage points** using real-time forecasts (without future information)
+- Maker-driven spot strategies also report the strongest **risk-adjusted performance**, with a Sharpe-style measure of approximately **101.9** in the main comparison
+- Comparable profitability gains do **not** appear consistently in Bitcoin **futures**, where results remain closer to benchmark performance
 
 ### Robustness / asymmetry
 Results suggest the signal is **state-dependent**:
-- stronger during **up markets**
-- stronger when **Maker moves are large** (e.g., demand-shock-like periods)
+- robustness checks remain stable across **lag lengths 3–7** (rather than only lag 5)
+- stronger during **up markets** (conditional directional accuracy rises to **almost 98%**)
+- stronger when **Maker moves are large** (e.g., above one standard deviation; demand-shock-like periods)
 - weaker in falling or quiet markets
 
 This supports the interpretation that Maker may capture **positive demand shocks into Bitcoin**, rather than a symmetric signal in all market conditions.
@@ -164,14 +168,11 @@ This extends the discussion beyond in-sample predictability. In short, the contr
 
 I designed and presented the research question, developed the forecasting and trading evaluation framework, interpreted the empirical results, and translated the analysis into a finance-focused research presentation.
 
-
-
 ---
 
 ## Tools Used
 - Excel, Stata 
 - Bloomberg (data source)
-
 
 ---
 
