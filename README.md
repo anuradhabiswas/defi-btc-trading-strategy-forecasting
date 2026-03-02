@@ -7,7 +7,7 @@ The core intuition comes from how many users interact with crypto markets today:
 
 ---
 
-## Research Motivation
+## Motivation
 
 Most crypto market inefficiency research focuses on **Bitcoin markets themselves** (spot, futures, exchanges, microstructure frictions, etc.).  
 But **DeFi tokens** remain relatively underexplored in this context.
