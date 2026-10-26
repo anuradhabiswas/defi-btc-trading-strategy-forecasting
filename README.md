@@ -1,193 +1,205 @@
-# Can Maker Make Bank on Bitcoin?
-## DeFi Token Signals, Out-of-Sample Forecasting, and Trading Profitability
 
-This project studies whether **Maker (MKR) token activity contains predictive information about Bitcoin returns** — and whether that information can be used in a **real-time trading strategy**.
+# Financial Market Forecasting & Predictive Analytics
+### Bitcoin & DeFi | Econometric Modelling, Forecast Evaluation & Trading Strategy Analysis
 
-The core intuition comes from how many users interact with crypto markets today: users often enter through wallets and swap routes, buying intermediary tokens before purchasing Bitcoin. If demand shocks appear first in token activity (such as Maker), Bitcoin prices may adjust with a lag. If that lag is systematic, it may create a **predictable and potentially arbitrageable signal**.
+![Stata](https://img.shields.io/badge/Stata-Econometrics-1F4E79)
+![Excel](https://img.shields.io/badge/Excel-Data_Analysis-217346)
+![Bloomberg](https://img.shields.io/badge/Bloomberg-Market_Data-F5A623)
+![Research](https://img.shields.io/badge/Research-Master's_Project-6C63FF)
 
----
+**Master's Research Project | Wilfrid Laurier University | 2025**
 
-## Motivation
+## Project Overview
 
-Most crypto market inefficiency research focuses on **Bitcoin markets themselves** (spot, futures, exchanges, microstructure frictions, etc.).  
-But **DeFi tokens** remain relatively underexplored in this context.
+Can historical market data improve financial forecasting and inform investment decisions?
 
-This project asks whether a DeFi token (Maker) can act as an **early signal** of Bitcoin demand and whether that signal survives:
+This project investigates whether **Maker (MKR) token returns contain predictive information about Bitcoin spot and futures returns**.
 
-- **out-of-sample forecast evaluation**, and
-- **profitability testing in implementable trading rules**
+Using daily Bloomberg data from **December 2018 to March 2025**, I developed an econometric forecasting framework to evaluate predictive relationships, benchmark forecasting models, and assess the economic value of model-generated trading signals.
 
-This directly connects to the **Efficient Market Hypothesis (EMH)**:
-- If prices adjust instantly, Maker should not systematically predict Bitcoin.
-- If Maker leads Bitcoin with a lag, that suggests **market inefficiency** and a possible arbitrage opportunity.
+The analysis integrates:
 
----
+- Time-series econometrics
+- Predictive modelling
+- Statistical hypothesis testing
+- Out-of-sample forecasting
+- Model performance evaluation
+- Trading strategy analysis
+- Risk-adjusted performance assessment
 
-## Research Question
+## Research Objectives
 
-**Do Maker token purchases have a predictable influence on Bitcoin prices that can be arbitraged?**
+1. Determine whether Maker returns contain information that helps predict Bitcoin returns.
+2. Compare conventional forecasting benchmarks against models incorporating Maker data.
+3. Evaluate whether predictive signals improve simulated trading outcomes.
+4. Examine model robustness across different market conditions.
 
----
+## Dataset
 
-## Project Scope
+| Attribute | Description |
+|---|---|
+| Source | Bloomberg |
+| Frequency | Daily |
+| Full sample | December 2018 – March 2025 |
+| Primary forecast window | January 2024 – January 2025 |
+| Variables | Maker (MKR), Bitcoin Spot, Bitcoin Futures |
+| Tools | Stata, Microsoft Excel |
 
-- Built an empirical forecasting framework using **daily crypto market data**
-- Tested **in-sample predictability** using a **bivariate VAR / Granger causality**
-- Generated **real-time out-of-sample one-step-ahead forecasts** (re-estimated daily)
-- Compared forecast performance across benchmark and Maker-based models
-- Evaluated whether forecast signals produce **economic gains** through trading strategies
-- Assessed robustness across lag structures and alternative forecast windows
-
----
-
-## Data
-
-- **Source:** Bloomberg
-- **Frequency:** Daily
-- **Assets:**
-  - Maker (MKR)
-  - Bitcoin Spot
-  - Bitcoin Futures
-- **Full Sample:** Dec 2018 – Mar 2025
-- **Main Forecast Evaluation Window:** 2024 (real-time rolling forecasts)
-
-### Why include Bitcoin futures?
-Futures prices reflect market expectations of Bitcoin at a future delivery date, so comparing spot vs futures helps test whether any signal is stronger where markets may be less vs more informationally efficient.
-
----
+> **Data availability:** Raw Bloomberg datasets are excluded from this repository due to licensing restrictions.
 
 ## Methodology
 
-## 1) In-Sample Predictability (Granger Causality)
-I estimate a **bivariate VAR** to test whether lagged Maker returns help predict Bitcoin returns.
+### 1. Data Preparation & Statistical Testing
 
-- **Null hypothesis (H₀):** Maker does not help predict Bitcoin
-- **Alternative (H₁):** Maker helps predict Bitcoin
+- Transformed historical market prices into return series.
+- Evaluated time-series stationarity.
+- Applied Vector Autoregression (VAR).
+- Conducted Granger causality tests to assess predictive relationships.
 
-This establishes whether the predictive relationship exists **within the sample** before moving to real-time forecasting.
+### 2. Forecasting Models
 
----
+Four forecasting specifications were evaluated:
 
-## 2) Real-Time Out-of-Sample Forecasting
-I simulate how a trader would operate in practice:
+| Model | Description |
+|---|---|
+| M0 | Random Walk with Drift |
+| M1 | Bitcoin Autoregressive Model — AR(5) |
+| M2 | Maker-Driven Linear Regression |
+| M3 | Combined Bitcoin–Maker VAR |
 
-- use only information available up to day *t*
-- re-estimate the model each day
-- generate a **one-step-ahead forecast** for day *t+1*
+Models were re-estimated using historical information to generate one-step-ahead out-of-sample forecasts.
 
-### Forecast models
-- **Model 0:** Random Walk with Drift (benchmark)
-- **Model 1:** Bitcoin AR(5)
-- **Model 2:** Linear Regression Model (LRM) with Maker
-- **Model 3:** VAR (Bitcoin + Maker lags)
+### 3. Model Evaluation
 
----
+Forecast performance was assessed using:
 
-## 3) Forecast Evaluation Metrics
+- **MSFE Ratio:** Forecast accuracy relative to a no-change benchmark.
+- **Directional Accuracy:** Percentage of correctly predicted return directions.
+- **Cumulative Returns:** Simulated trading performance.
+- **Risk-Adjusted Returns:** Performance relative to risk exposure.
 
-### Statistical criteria
-- **MSFE Ratio** (relative to a no-change benchmark)
-- **Directional Accuracy / Success Ratio**
-  - 50% = random guessing
-  - >50% = directional forecasting ability
+### 4. Strategy Evaluation
 
-These are standard forecasting metrics, but they are not the final test of arbitrage value.
+Compared the benchmark against forecast-driven long/short trading rules.
 
----
+The trading signal was based on the predicted direction of Bitcoin returns:
 
-## 4) Trading Strategy Evaluation (Economic Significance)
+- Positive forecast: Long position
+- Negative forecast: Short position
 
-Even if statistical gains are small, forecasts may still be valuable if they improve **trading profitability**.
-
-### A) Buy-and-Hold (Benchmark)
-Passive benchmark: buy Bitcoin at the start and hold through the forecast window.
-
-### B) Long-and-Short Forecast Strategy
-Use the **sign of the forecast**:
-- Forecast > 0 → go **long**
-- Forecast < 0 → go **short**
-
-Daily strategy returns are computed from forecast sign × actual return and accumulated over the forecast window.
-
-### Profitability metrics
-- **Cumulative returns**
-- **Risk-adjusted performance (Sharpe-style comparison)**
+Performance was evaluated across spot and futures markets.
 
 ---
 
-## Key Findings (Summary)
+## Key Results
 
-### In-sample
-- Maker shows **predictive power for Bitcoin spot** in the Granger framework (significant test result)
-- No comparable predictive effect for Bitcoin futures (not significant, even at the 10% level), consistent with stronger market efficiency
+### Granger Causality
 
-### Out-of-sample forecasting
-- All four models beat the **no-change benchmark** on MSFE ratio in the main spot forecast table, but differences are small
-- Directional accuracy is only modestly above random in baseline comparisons; the **Maker-only model is ~0.537 (53.7%)**, and results are not statistically significant under standard forecast metrics
+| Market | p-value | Result |
+|---|---:|---|
+| Bitcoin Spot | 0.002 | Significant predictive relationship |
+| Bitcoin Futures | 0.203 | No statistically significant relationship |
 
-### Trading profitability (main result)
-- In the 2024 spot-market evaluation window, the benchmark **buy-and-hold strategy earns ~320% cumulative return**
-- Maker-based models (especially **LRM with Maker**, and also VAR) increase cumulative returns to **~347–348%**
-- This is an economically meaningful improvement of roughly **+25 to +30 percentage points** using real-time forecasts (without future information)
-- Maker-driven spot strategies also report the strongest **risk-adjusted performance**, with a Sharpe-style measure of approximately **101.9** in the main comparison
-- Comparable profitability gains do **not** appear consistently in Bitcoin **futures**, where results remain closer to benchmark performance
+Maker returns demonstrated in-sample predictive information for Bitcoin spot, but not Bitcoin futures.
 
-### Robustness / asymmetry
-Results suggest the signal is **state-dependent**:
-- robustness checks remain stable across **lag lengths 3–7** (rather than only lag 5)
-- stronger during **up markets** (conditional directional accuracy rises to **almost 98%**)
-- stronger when **Maker moves are large** (e.g., above one standard deviation; demand-shock-like periods)
-- weaker in falling or quiet markets
+### Out-of-Sample Forecasting
 
-This supports the interpretation that Maker may capture **positive demand shocks into Bitcoin**, rather than a symmetric signal in all market conditions.
+- Forecast MSFE ratios were below the no-change benchmark.
+- Differences between models were relatively small.
+- Directional accuracy was approximately 53% for the primary spot models.
+- Out-of-sample forecasting improvements were not statistically significant.
+
+### Trading Strategy Performance
+
+**Bitcoin Spot | January 2024 – January 2025**
+
+| Strategy | Cumulative Return |
+|---|---:|
+| Benchmark | 320.38% |
+| Bitcoin AR(5) | 314.04% |
+| Maker-Driven Model | **347.75%** |
+| Bitcoin + Maker VAR | 347.58% |
+
+**Key result:** The Maker-driven model generated a simulated cumulative return **27.37 percentage points above the benchmark** in the primary evaluation window.
+
+However, this improvement was not statistically significant and should not be interpreted as guaranteed or consistently achievable investment performance.
+
+## Robustness & Scenario Analysis
+
+The research also assessed performance across alternative specifications and market environments.
+
+Key observations:
+
+- Results were examined using lag structures ranging from 3 to 7.
+- Predictive performance varied across forecast windows.
+- Conditional directional accuracy was stronger during rising markets.
+- Larger Maker movements were associated with stronger conditional signals.
+- Futures-market profitability gains were less consistent.
+
+These results suggest that the usefulness of the predictive signal may depend on market conditions.
+
+## Business & Analytical Applications
+
+Although the research focuses on cryptocurrency markets, its analytical framework is transferable to broader financial and business applications.
+
+| Analytical Competency | Practical Application |
+|---|---|
+| Predictive Analytics | Forecasting trends using historical data |
+| Statistical Modelling | Identifying and evaluating predictive relationships |
+| Model Benchmarking | Comparing alternative analytical approaches |
+| Financial Analysis | Evaluating return and risk metrics |
+| Scenario Analysis | Assessing outcomes under varying conditions |
+| Model Validation | Testing performance beyond the training sample |
+| Decision Support | Translating statistical evidence into actionable conclusions |
+
+## Limitations
+
+- Out-of-sample forecasting improvements were not statistically significant.
+- Model performance varied across market conditions.
+- Results reflect historical simulations rather than live trading.
+- Trading costs and execution constraints may affect realized profitability.
+- Granger causality does not establish structural or economic causation.
+
+## Repository Structure
+
+```text
+financial-market-forecasting/
+│
+├── README.md
+│
+├── presentation/
+│   └── final_research_presentation.pdf
+│
+├── figures/
+│   └── bitcoin_returns_comparison.png
+│
+└── code/
+    └── (add reproducible Stata scripts when available)
+```
+
+*The directory structure above is the intended organization; only list files actually uploaded to the repository.*
+
+## Skills Demonstrated
+
+`Stata` `Excel` `Bloomberg` `Econometrics`
+`Time-Series Analysis` `VAR` `Granger Causality`
+`Predictive Analytics` `Forecasting` `Model Evaluation`
+`Financial Analysis` `Statistical Testing` `Quantitative Research`
+
+## Research Context
+
+**Original Title:** *Can Maker Make Bank on Bitcoin? DeFi Dynamics & Trading Profitability*
+
+**Degree:** Master of Business Economics
+
+**Institution:** Wilfrid Laurier University
+
+**Supervisor:** Dr. Stephen Snudden
+
+**Year:** 2025
 
 ---
 
-## Contribution
+**Author:** Anuradha Biswas
 
-To my knowledge, this project is the **first (or among the first)** to test whether a **DeFi-token signal (Maker)** can be used to predict Bitcoin in a framework that combines:
-
-- real-time out-of-sample forecasting,
-- implementable long/short trading strategies, and
-- profitability plus risk-adjusted performance evaluation.
-
-This extends the discussion beyond in-sample predictability. In short, the contribution is not just that “Maker appears in a regression,” but whether the signal can support **real-world arbitrage-style evidence** under a trader-feasible forecasting setup.
-
----
-
-## Repository Contents
-
-- `presentation/` — Final project presentation (PDF)
-- `README.md` — Project overview, methods, findings, and interpretation
-
----
-
-## My Role
-
-I designed and presented the research question, developed the forecasting and trading evaluation framework, interpreted the empirical results, and translated the analysis into a finance-focused research presentation.
-
----
-
-## Tools Used
-- Excel, Stata 
-- Bloomberg (data source)
-
----
-
-## Data & Reproducibility Note
-
-Raw Bloomberg data may not be publicly redistributable due to licensing restrictions.
-
-This repository may therefore include:
-- methodology description,
-- code (where permitted),
-- output tables/figures,
-- and the presentation,
-
-while excluding proprietary raw price data.
-
----
-
-## Academic Context
-Final project presentation (Winter 2025)  
-Supervisor: Dr. Stephen Snudden
+*Developed as an independent graduate research project.*
