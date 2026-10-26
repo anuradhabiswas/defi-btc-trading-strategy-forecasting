@@ -122,7 +122,6 @@ Maker returns demonstrated in-sample predictive information for Bitcoin spot, bu
 
 **Key result:** The Maker-driven model generated a simulated cumulative return **27.37 percentage points above the benchmark** in the primary evaluation window.
 
-However, this improvement was not statistically significant and should not be interpreted as guaranteed or consistently achievable investment performance.
 
 ## Robustness & Scenario Analysis
 
