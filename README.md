@@ -168,16 +168,12 @@ financial-market-forecasting/
 ├── README.md
 │
 ├── presentation/
-│   └── final_research_presentation.pdf
-│
-├── figures/
-│   └── bitcoin_returns_comparison.png
-│
+│   └── Maker_Bitcoin_Final_Presentation.pdf
 └── code/
-    └── (add reproducible Stata scripts when available)
+    └── (to be uploaded)
 ```
 
-*The directory structure above is the intended organization; only list files actually uploaded to the repository.*
+
 
 ## Skills Demonstrated
 
